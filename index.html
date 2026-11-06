@@ -1,0 +1,1011 @@
+<!doctype html><html><head><meta charset="utf-8"><title>anime wallpaper picker</title><style>
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(22px) scale(0.97);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 0 rgba(255, 91, 167, 0.2); }
+    50% { box-shadow: 0 0 22px rgba(255, 91, 167, 0.35); }
+  }
+
+  @keyframes modalEnter {
+    from { opacity: 0; transform: translateY(16px) scale(0.96); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  @keyframes buttonShine {
+    to { background-position: -200% center; }
+  }
+
+  body {
+    margin: 0;
+    background: linear-gradient(135deg, #ffeaf5 0%, #ffcbe6 28%, #ec9bc5 60%, #b25e8c 100%);
+    background-size: 180% 180%;
+    animation: gradientShift 18s ease-in-out infinite;
+    color: #4a1030;
+    font-family: Segoe UI, system-ui, sans-serif;
+    padding: 26px 28px 80px;
+  }
+
+  h1 {
+    font-size: 23px;
+    font-weight: 700;
+    margin: 0 0 6px;
+    color: #84194f;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  h2 {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 38px 0 12px;
+    color: #8f1f57;
+    border-bottom: 2px solid #ff9ecb;
+    padding-bottom: 6px;
+    animation: fadeUp 0.9s ease both;
+  }
+
+  h3 {
+    margin: 0;
+    font-size: 19px;
+    color: #7b1a4d;
+  }
+
+  p {
+    color: #6b2145;
+    font-size: 13px;
+    margin: 0 0 20px;
+    animation: fadeUp 0.9s ease both;
+  }
+
+  .account-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    margin: 18px 0 28px;
+    padding: 18px 20px;
+    background: linear-gradient(115deg, rgba(255, 255, 255, 0.62), rgba(255, 225, 240, 0.55), rgba(255, 255, 255, 0.62));
+    background-size: 200% 100%;
+    border: 2px solid rgba(255, 119, 183, 0.9);
+    border-radius: 18px;
+    box-shadow: 0 10px 22px rgba(141, 44, 91, 0.12);
+    animation: fadeUp 0.9s ease both, gradientShift 12s ease-in-out infinite;
+  }
+
+  .account-copy {
+    flex: 1;
+  }
+
+  .account-copy p {
+    margin: 8px 0 0;
+    font-size: 12px;
+  }
+
+  .badge {
+    display: inline-block;
+    background: #ff2f8b;
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 6px 10px;
+    border-radius: 999px;
+    margin-bottom: 8px;
+    box-shadow: 0 4px 12px rgba(255, 47, 139, 0.25);
+    animation: pulseGlow 2.8s ease-in-out infinite;
+  }
+
+  .account-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+  }
+
+  .upload-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .upload-note {
+    color: #8f1f57;
+    font-size: 11px;
+    line-height: 1.4;
+    text-align: right;
+  }
+
+  .upload-grid {
+    margin-bottom: 30px;
+  }
+
+  .upload-card {
+    position: relative;
+  }
+
+  .upload-card .delete-upload {
+    display: block;
+    width: calc(100% - 16px);
+    margin: 0 8px 8px;
+    padding: 8px 10px;
+    border: 1px solid #e8a1c3;
+    border-radius: 9px;
+    background: #fff0f6;
+    color: #8f1f57;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  }
+
+  .upload-card .delete-upload:hover {
+    background: #d93c75;
+    color: #fff;
+    transform: translateY(-1px);
+  }
+
+  .upload-card img {
+    width: 100%;
+    display: block;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    background: #f6d7e6;
+  }
+
+  .upload-card figcaption {
+    overflow-wrap: anywhere;
+  }
+
+  .account-actions button,
+  .data-saver-toggle,
+  .modal-submit {
+    border: none;
+    background: linear-gradient(135deg, #ff4e9d, #d93c8d);
+    color: white;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 11px 18px;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 8px 18px rgba(255, 82, 160, 0.28);
+    transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s ease, filter 0.25s ease;
+  }
+
+  .account-actions button,
+  .modal-submit {
+    background-size: 200% 100%;
+  }
+
+  .account-actions button:hover,
+  .data-saver-toggle:hover,
+  .modal-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 22px rgba(255, 82, 160, 0.35);
+    filter: brightness(1.06);
+  }
+
+  .account-actions button:hover,
+  .modal-submit:hover {
+    animation: buttonShine 0.9s ease forwards;
+  }
+
+  .account-actions button:disabled,
+  .modal-submit:disabled {
+    cursor: wait;
+    opacity: 0.7;
+    transform: none;
+  }
+
+  .account-actions span {
+    color: #8f1f57;
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  .data-saver-toggle {
+    padding: 8px 12px;
+    font-size: 11px;
+    background: rgba(255, 255, 255, 0.55);
+    color: #7b1a4d;
+    border: 2px solid rgba(255, 120, 183, 0.9);
+    box-shadow: none;
+    margin-top: 10px;
+  }
+
+  .data-saver-active .card img {
+    filter: saturate(0.75) brightness(0.9);
+    transform: scale(0.98);
+  }
+
+  .data-saver-active .card {
+    box-shadow: 0 6px 14px rgba(141, 44, 91, 0.12);
+  }
+
+  .modal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(62, 15, 34, 0.4);
+    backdrop-filter: blur(4px);
+    z-index: 20;
+  }
+
+  .modal.open {
+    display: flex;
+    animation: fadeUp 0.2s ease both;
+  }
+
+  .modal-panel {
+    width: min(420px, calc(100vw - 32px));
+    background: #fff8fb;
+    border: 2px solid #f8a5cf;
+    border-radius: 20px;
+    box-shadow: 0 18px 40px rgba(67, 21, 40, 0.2);
+    padding: 22px;
+    animation: modalEnter 0.32s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+
+  .modal-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+
+  .modal-top h3 {
+    font-size: 20px;
+  }
+
+  .close-btn {
+    border: none;
+    background: #ffe1ee;
+    color: #7b1a4d;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+  }
+
+  .modal-form {
+    display: grid;
+    gap: 12px;
+  }
+
+  .modal-form[hidden] {
+    display: none;
+  }
+
+  .modal-form [hidden] {
+    display: none !important;
+  }
+
+  .form-message {
+    margin: 0;
+    color: #6b2145;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .form-message a {
+    color: #a51d63;
+    font-weight: 700;
+  }
+
+  .modal-form label {
+    display: grid;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #7c1d58;
+  }
+
+  .modal-form input {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #f2bfd9;
+    background: #fff;
+    border-radius: 10px;
+    padding: 12px 12px;
+    font: inherit;
+    color: #4a1030;
+  }
+
+  .modal-submit {
+    margin-top: 6px;
+  }
+
+  .toast {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    background: #7b1a4d;
+    color: white;
+    padding: 12px 16px;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(81, 23, 53, 0.25);
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    pointer-events: none;
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 14px;
+  }
+
+  .card {
+    position: relative;
+    margin: 0;
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 3px solid #ff9ecb;
+    box-shadow: 0 6px 18px #8d2c5b40;
+    animation: fadeUp 0.8s ease both;
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease, border-color 0.25s ease;
+  }
+
+  .card:nth-child(6n + 1) { animation-delay: 0.04s; }
+  .card:nth-child(6n + 2) { animation-delay: 0.1s; }
+  .card:nth-child(6n + 3) { animation-delay: 0.16s; }
+  .card:nth-child(6n + 4) { animation-delay: 0.22s; }
+  .card:nth-child(6n + 5) { animation-delay: 0.28s; }
+  .card:nth-child(6n) { animation-delay: 0.34s; }
+
+  .card:hover {
+    transform: translateY(-5px) scale(1.01);
+    box-shadow: 0 14px 28px rgba(141, 44, 91, 0.22);
+    border-color: #ff5ba7;
+    animation: none;
+  }
+
+  .card img {
+    width: 100%;
+    display: block;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    background: #f6d7e6;
+    transition: transform 0.34s ease, filter 0.34s ease;
+  }
+
+  .card:hover img {
+    transform: scale(1.03);
+    filter: saturate(1.1) contrast(1.03);
+  }
+
+  .num {
+    position: absolute;
+    top: 9px;
+    left: 9px;
+    background: #ff2f8b;
+    color: #fff;
+    font-weight: 700;
+    font-size: 14px;
+    min-width: 28px;
+    height: 28px;
+    padding: 0 6px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px #0006;
+    z-index: 2;
+    animation: pulseGlow 2s ease-in-out infinite;
+  }
+
+  figcaption {
+    padding: 6px 10px;
+    font-size: 11px;
+    color: #a3597c;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      scroll-behavior: auto !important;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .account-banner {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .account-actions {
+      align-items: flex-start;
+    }
+
+    .upload-note {
+      text-align: left;
+    }
+  }
+</style>
+</head><body>
+  <h1>anime wallpaper picker</h1>
+  <p>click any image to open the full-resolution original. reply with section + number, e.g. "sunset 4", "rain 4", "wall 22".</p>
+
+  <div class="account-banner">
+    <div class="account-copy">
+      <span class="badge">member access</span>
+      <h3>create an account to upload your own wallpapers</h3>
+      <p>save favorites, submit custom anime art, and build your own gallery.</p>
+      <button class="data-saver-toggle" type="button" aria-pressed="false">Data Saver: Off</button>
+    </div>
+    <div class="account-actions">
+      <button id="openAccountModal" type="button">create account</button>
+      <button class="upload-button" id="uploadWallpaperButton" type="button">＋ Upload wallpaper</button>
+      <input id="wallpaperFile" type="file" accept="image/*" hidden>
+      <span class="upload-note">Uploads stay in this browser (max 15 MB each).</span>
+    </div>
+  </div>
+
+  <section id="myUploadsSection" hidden>
+    <h2>my uploads</h2>
+    <div id="myUploadsGrid" class="grid upload-grid"></div>
+  </section>
+
+  <div id="accountModal" class="modal" aria-hidden="true">
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="signupTitle">
+      <div class="modal-top">
+        <h3 id="signupTitle">Create account</h3>
+        <button class="close-btn" type="button" aria-label="Close modal">×</button>
+      </div>
+
+      <p class="form-message" id="backendSetupNotice">
+        Demo mode: usernames are saved only in this browser. No email is sent, and no password is stored. This is not a real secure account.
+      </p>
+
+      <form class="modal-form" id="accountForm">
+        <label>
+          Username
+          <input type="text" name="username" placeholder="yourname" minlength="3" maxlength="20" pattern="[A-Za-z0-9_]{3,20}" autocomplete="username" aria-describedby="usernameHint" required>
+          <span id="usernameHint" class="form-message">3–20 letters, numbers, or underscores. Usernames are unique.</span>
+        </label>
+        <label>
+          Email
+          <input type="email" name="email" placeholder="you@example.com" required>
+        </label>
+        <label>
+          Password
+          <input type="password" name="password" placeholder="At least 8 characters" minlength="8" autocomplete="new-password" required>
+        </label>
+        <button class="modal-submit" type="submit">Create my account</button>
+      </form>
+
+      <form class="modal-form" id="otpForm" hidden>
+        <p class="form-message">We sent a 6-digit verification code to <strong id="otpEmail"></strong>.</p>
+        <label>
+          Email verification code
+          <input type="text" name="token" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" placeholder="123456" required>
+        </label>
+        <button class="modal-submit" type="submit">Verify email</button>
+        <button class="data-saver-toggle" id="resendOtp" type="button">Send a new code</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite">Account created successfully!</div>
+
+  <h2>sunset &amp; beach - 15 files</h2><div class="grid">  <figure class="card"><span class="num">1</span><a href="sunset/sunset-01.jpg" target="_blank"><img src="sunset/sunset-01.jpg" loading="lazy"></a><figcaption>1890x1417 &middot; 1 MB</figcaption></figure>
+  <figure class="card"><span class="num">2</span><a href="sunset/sunset-02.jpg" target="_blank"><img src="sunset/sunset-02.jpg" loading="lazy"></a><figcaption>2120x1595 &middot; 3 MB</figcaption></figure>
+  <figure class="card"><span class="num">3</span><a href="sunset/sunset-03.jpg" target="_blank"><img src="sunset/sunset-03.jpg" loading="lazy"></a><figcaption>1980x1400 &middot; 0 MB</figcaption></figure>
+  <figure class="card"><span class="num">4</span><a href="sunset/sunset-04.png" target="_blank"><img src="sunset/sunset-04.png" loading="lazy"></a><figcaption>2000x1300 &middot; 2 MB</figcaption></figure>
+  <figure class="card"><span class="num">5</span><a href="sunset/sunset-05.png" target="_blank"><img src="sunset/sunset-05.png" loading="lazy"></a><figcaption>3035x2150 &middot; 2 MB</figcaption></figure>
+  <figure class="card"><span class="num">6</span><a href="sunset/sunset-06.png" target="_blank"><img src="sunset/sunset-06.png" loading="lazy"></a><figcaption>2000x1155 &middot; 2 MB</figcaption></figure>
+  <figure class="card"><span class="num">7</span><a href="sunset/sunset-07.jpg" target="_blank"><img src="sunset/sunset-07.jpg" loading="lazy"></a><figcaption>2549x1806 &middot; 5 MB</figcaption></figure>
+  <figure class="card"><span class="num">8</span><a href="sunset/sunset-08.png" target="_blank"><img src="sunset/sunset-08.png" loading="lazy"></a><figcaption>1754x1240 &middot; 3 MB</figcaption></figure>
+  <figure class="card"><span class="num">9</span><a href="sunset/sunset-09.jpg" target="_blank"><img src="sunset/sunset-09.jpg" loading="lazy"></a><figcaption>2000x1433 &middot; 1 MB</figcaption></figure>
+  <figure class="card"><span class="num">10</span><a href="sunset/sunset-10.jpg" target="_blank"><img src="sunset/sunset-10.jpg" loading="lazy"></a><figcaption>1920x1080 &middot; 0 MB</figcaption></figure>
+  <figure class="card"><span class="num">11</span><a href="sunset/sunset-11.png" target="_blank"><img src="sunset/sunset-11.png" loading="lazy"></a><figcaption>4093x2894 &middot; 10 MB</figcaption></figure>
+  <figure class="card"><span class="num">12</span><a href="sunset/sunset-12.png" target="_blank"><img src="sunset/sunset-12.png" loading="lazy"></a><figcaption>5212x3046 &middot; 13 MB</figcaption></figure>
+  <figure class="card"><span class="num">13</span><a href="sunset/sunset-13.jpg" target="_blank"><img src="sunset/sunset-13.jpg" loading="lazy"></a><figcaption>2048x1152 &middot; 0 MB</figcaption></figure>
+  <figure class="card"><span class="num">14</span><a href="sunset/sunset-14.png" target="_blank"><img src="sunset/sunset-14.png" loading="lazy"></a><figcaption>3840x2160 &middot; 6 MB</figcaption></figure>
+  <figure class="card"><span class="num">15</span><a href="sunset/sunset-15.jpg" target="_blank"><img src="sunset/sunset-15.jpg" loading="lazy"></a><figcaption>2048x1535 &middot; 0 MB</figcaption></figure></div><h2>rain &amp; kiss - 16 files</h2><div class="grid">  <figure class="card"><span class="num">1</span><a href="rain/rain-01.jpg" target="_blank"><img src="rain/rain-01.jpg" loading="lazy"></a><figcaption>2048x1502 &middot; 0 MB</figcaption></figure>
+  <figure class="card"><span class="num">2</span><a href="rain/rain-02.jpg" target="_blank"><img src="rain/rain-02.jpg" loading="lazy"></a><figcaption>2048x1476 &middot; 0 MB</figcaption></figure>
+  <figure class="card"><span class="num">3</span><a href="rain/rain-03.jpg" target="_blank"><img src="rain/rain-03.jpg" loading="lazy"></a><figcaption>2048x1152 &middot; 0 MB</figcaption></figure>
+  <figure class="card"><span class="num">4</span><a href="rain/rain-04.jpg" target="_blank"><img src="rain/rain-04.jpg" loading="lazy"></a><figcaption>3992x2610 &middot; 1 MB</figcaption></figure>
+  <figure class="card"><span class="num">5</span><a href="rain/rain-05.png" target="_blank"><img src="rain/rain-05.png" loading="lazy"></a><figcaption>2048x1152 &middot; 1 MB</figcaption></figure>
+  <figure class="card"><span class="num">6</span><a href="rain/rain-06.jpg" target="_blank"><img src="rain/rain-06.jpg" loading="lazy"></a><figcaption>4510x3189 &middot; 6 MB</figcaption></figure>
+  <figure class="card"><span class="num">7</span><a href="rain/rain-07.jpg" target="_blank"><img src="rain/rain-07.jpg" loading="lazy"></a><figcaption>2048x1535 &middot; 0 MB</figcaption></figure>
+  <figure class="card"><span class="num">8</span><a href="rain/rain-08.jpg" target="_blank"><img src="rain/rain-08.jpg" loading="lazy"></a><figcaption>4096x2896 &middot; 1 MB</figcaption></figure>
+  <figure class="card"><span class="num">9</span><a href="rain/rain-09.jpg" target="_blank"><img src="rain/rain-09.jpg" loading="lazy"></a><figcaption>3176x1970 &middot; 1 MB</figcaption></figure>
+  <figure class="card"><span class="num">10</span><a href="rain/rain-10.jpg" target="_blank"><img src="rain/rain-10.jpg" loading="lazy"></a><figcaption>1887x1249 &middot; 1 MB</figcaption></figure>
+  <figure class="card"><span class="num">11</span><a href="rain/rain-11.jpg" target="_blank"><img src="rain/rain-11.jpg" loading="lazy"></a><figcaption>3756x2035 &middot; 1 MB</figcaption></figure>
+  <figure class="card"><span class="num">12</span><a href="rain/rain-12.jpg" target="_blank"><img src="rain/rain-12.jpg" loading="lazy"></a><figcaption>2176x1536 &middot; 1 MB</figcaption></figure>
+  <figure class="card"><span class="num">13</span><a href="rain/rain-13.jpg" target="_blank"><img src="rain/rain-13.jpg" loading="lazy"></a><figcaption>2924x1924 &middot; 2 MB</figcaption></figure>
+  <figure class="card"><span class="num">14</span><a href="rain/rain-14.jpg" target="_blank"><img src="rain/rain-14.jpg" loading="lazy"></a><figcaption>3508x2480 &middot; 2 MB</figcaption></figure>
+  <figure class="card"><span class="num">15</span><a href="rain/rain-15.jpg" target="_blank"><img src="rain/rain-15.jpg" loading="lazy"></a><figcaption>2048x1366 &middot; 0 MB</figcaption></figure>
+  <figure class="card"><span class="num">16</span><a href="rain/rain-16.jpg" target="_blank"><img src="rain/rain-16.jpg" loading="lazy"></a><figcaption>2558x1806 &middot; 2 MB</figcaption></figure></div><h2>sweet yuri - 50 files</h2><div class="grid">  <figure class="card"><span class="num">1</span><a href="wallpapers/yuri-wall-01.jpg" target="_blank"><img src="wallpapers/yuri-wall-01.jpg" loading="lazy"></a><figcaption>4608x2592 &middot; 2 MB</figcaption></figure>
+  <figure class="card"><span class="num">2</span><a href="wallpapers/yuri-wall-02.jpg" target="_blank"><img src="wallpapers/yuri-wall-02.jpg" loading="lazy"></a><figcaption>2600x1500 &middot; 1 MB</figcaption></figure>
+  <figure class="card"><span class="num">3</span><a href="wallpapers/yuri-wall-03.jpg" target="_blank"><img src="wallpapers/yuri-wall-03.jpg" loading="lazy"></a><figcaption>1920x1080 &middot; 2 MB</figcaption></figure>
+  <figure class="card"><span class="num">4</span><a href="wallpapers/yuri-wall-04.png" target="_blank"><img src="wallpapers/yuri-wall-04.png" loading="lazy"></a><figcaption>2615x1599 &middot; 1 MB</figcaption></figure>
+  <figure class="card"><span class="num">5</span><a href="wallpapers/yuri-wall-05.jpg" target="_blank"><img src="wallpapers/yuri-wall-05.jpg" loading="lazy"></a><figcaption>2048x1132 &middot; 0 MB</figcaption></figure>
+  <figure class="card"><span class="num">6</span><a href="wallpapers/yuri-wall-06.jpg" target="_blank"><img src="wallpapers/yuri-wall-06.jpg" loading="lazy"></a><figcaption>2912x1768 &middot; 0 MB</figcaption></figure>
+  <figure class="card"><span class="num">7</span><a href="wallpapers/yuri-wall-07.jpg" target="_blank"><img src="wallpapers/yuri-wall-07.jpg" loading="lazy"></a><figcaption>2390x1502 &middot; 0 MB</figcaption></figure>
+  <figure class="card"><span class="num">8</span><a href="wallpapers/yuri-wall-08.jpg" target="_blank"><img src="wallpapers/yuri-wall-08.jpg" loading="lazy"></a><figcaption>4096x2891 &middot; 1 MB</figcaption></figure>
+  <figure class="card"><span class="num">9</span><a href="wallpapers/yuri-wall-09.jpg" target="_blank"><img src="wallpapers/yuri-wall-09.jpg" loading="lazy"></a><figcaption>2360x1640 &middot; 1 MB</figcaption></figure>
+  <figure class="card"><span class="num">10</span><a href="wallpapers/yuri-wall-10.jpg" target="_blank"><img src="wallpapers/yuri-wall-10.jpg" loading="lazy"></a><figcaption>3000x2000 &middot; 0 MB</figcaption></figure>
+  <figure class="card"><span class="num">11</span><a href="wallpapers/yuri-wall-11.jpg" target="_blank"><img src="wallpapers/yuri-wall-11.jpg" loading="lazy"></a><figcaption>2048x1448 &middot; 0 MB</figcaption></figure>
+  <figure class="card"><span class="num">12</span><a href="wallpapers/yuri-wall-12.jpg" target="_blank"><img src="wallpapers/yuri-wall-12.jpg" loading="lazy"></a><figcaption>2048x1396 &middot; 0 MB</figcaption></figure>
+  <figure class="card"><span class="num">13</span><a href="wallpapers/yuri-wall-13.jpg" target="_blank"><img src="wallpapers/yuri-wall-13.jpg" loading="lazy"></a><figcaption>2039x1378 &middot; 0 MB</figcaption></figure>
+  <figure class="card"><span class="num">14</span><a href="wallpapers/yuri-wall-14.jpg" target="_blank"><img src="wallpapers/yuri-wall-14.jpg" loading="lazy"></a><figcaption>1750x1085 &middot; 0 MB</figcaption></figure>
+  <figure class="card"><span class="num">15</span><a href="wallpapers/yuri-wall-15.jpg" target="_blank"><img src="wallpapers/yuri-wall-15.jpg" loading="lazy"></a><figcaption>2048x1451 &middot; 2 MB</figcaption></figure>
+  <figure class="card"><span class="num">16</span><a href="wallpapers/yuri-wall-16.jpg" target="_blank"><img src="wallpapers/yuri-wall-16.jpg" loading="lazy"></a><figcaption>2274x1303 &middot; 0 MB</figcaption></figure>
+  <figure class="card"><span class="num">17</span><a href="wallpapers/yuri-wall-17.jpg" target="_blank"><img src="wallpapers/yuri-wall-17.jpg" loading="lazy"></a><figcaption>2582x1366 &middot; 0 MB</figcaption></figure>
+  <figure class="card"><span class="num">18</span><a href="wallpapers/yuri-wall-18.jpg" target="_blank"><img src="wallpapers/yuri-wall-18.jpg" loading="lazy"></a><figcaption>1920x1080 &middot; 0 MB</figcaption></figure>
+  <figure class="card"><span class="num">19</span><a href="wallpapers/yuri-wall-19.jpg" target="_blank"><img src="wallpapers/yuri-wall-19.jpg" loading="lazy"></a><figcaption>2048x1394 &middot; 0 MB</figcaption></figure>
+  <figure class="card"><span class="num">20</span><a href="wallpapers/yuri-wall-20.png" target="_blank"><img src="wallpapers/yuri-wall-20.png" loading="lazy"></a><figcaption>3307x2331 &middot; 1 MB</figcaption></figure>
+  <figure class="card"><span class="num">21</span><a href="wallpapers/yuri-wall-21.jpg" target="_blank"><img src="wallpapers/yuri-wall-21.jpg" loading="lazy"></a><figcaption>1620x1080 &middot; 0 MB</figcaption></figure>
+  <figure class="card"><span class="num">22</span><a href="wallpapers/yuri-wall-22.png" target="_blank"><img src="wallpapers/yuri-wall-22.png" loading="lazy"></a><figcaption>2894x2039 &middot; 9 MB</figcaption></figure>
+  <figure class="card"><span class="num">23</span><a href="wallpapers/yuri-wall-23.jpg" target="_blank"><img src="wallpapers/yuri-wall-23.jpg" loading="lazy"></a><figcaption>1978x1321 &middot; 1 MB</figcaption></figure>
+  <figure class="card"><span class="num">24</span><a href="wallpapers/yuri-wall-24.jpg" target="_blank"><img src="wallpapers/yuri-wall-24.jpg" loading="lazy"></a><figcaption>2089x1462 &middot; 1 MB</figcaption></figure>
+  <figure class="card"><span class="num">25</span><a href="wallpapers/yuri-wall-25.jpg" target="_blank"><img src="wallpapers/yuri-wall-25.jpg" loading="lazy"></a><figcaption>3700x1900 &middot; 1 MB</figcaption></figure>
+  <figure class="card"><span class="num">26</span><a href="wallpapers/yuri-wall-26.jpg" target="_blank"><img src="wallpapers/yuri-wall-26.jpg" loading="lazy"></a><figcaption>3508x2480 &middot; 0 MB</figcaption></figure>
+  <figure class="card"><span class="num">27</span><a href="wallpapers/yuri-wall-27.jpg" target="_blank"><img src="wallpapers/yuri-wall-27.jpg" loading="lazy"></a><figcaption>2304x1582 &middot; 1 MB</figcaption></figure>
+  <figure class="card"><span class="num">28</span><a href="wallpapers/yuri-wall-28.jpg" target="_blank"><img src="wallpapers/yuri-wall-28.jpg" loading="lazy"></a><figcaption>4096x2850 &middot; 1 MB</figcaption></figure>
+  <figure class="card"><span class="num">29</span><a href="wallpapers/yuri-wall-29.jpg" target="_blank"><img src="wallpapers/yuri-wall-29.jpg" loading="lazy"></a><figcaption>1600x1080 &middot; 0 MB</figcaption></figure>
+  <figure class="card"><span class="num">30</span><a href="wallpapers/yuri-wall-30.jpg" target="_blank"><img src="wallpapers/yuri-wall-30.jpg" loading="lazy"></a><figcaption>2048x1448 &middot; 0 MB</figcaption></figure>
+  <figure class="card"><span class="num">31</span><a href="wallpapers/yuri-wall-31.png" target="_blank"><img src="wallpapers/yuri-wall-31.png" loading="lazy"></a><figcaption>2388x1668 &middot; 11 MB</figcaption></figure>
+  <figure class="card"><span class="num">32</span><a href="wallpapers/yuri-wall-32.jpg" target="_blank"><img src="wallpapers/yuri-wall-32.jpg" loading="lazy"></a><figcaption>2480x1362 &middot; 0 MB</figcaption></figure>
+  <figure class="card"><span class="num">33</span><a href="wallpapers/yuri-wall-33.jpg" target="_blank"><img src="wallpapers/yuri-wall-33.jpg" loading="lazy"></a><figcaption>1614x1141 &middot; 0 MB</figcaption></figure>
+  <figure class="card"><span class="num">34</span><a href="wallpapers/yuri-wall-34.jpg" target="_blank"><img src="wallpapers/yuri-wall-34.jpg" loading="lazy"></a><figcaption>2048x1300 &middot; 0 MB</figcaption></figure>
+  <figure class="card"><span class="num">35</span><a href="wallpapers/yuri-wall-35.png" target="_blank"><img src="wallpapers/yuri-wall-35.png" loading="lazy"></a><figcaption>4000x2600 &middot; 5 MB</figcaption></figure>
+  <figure class="card"><span class="num">36</span><a href="wallpapers/yuri-wall-36.jpg" target="_blank"><img src="wallpapers/yuri-wall-36.jpg" loading="lazy"></a><figcaption>1800x1200 &middot; 0 MB</figcaption></figure>
+  <figure class="card"><span class="num">37</span><a href="wallpapers/yuri-wall-37.jpg" target="_blank"><img src="wallpapers/yuri-wall-37.jpg" loading="lazy"></a><figcaption>1600x1100 &middot; 0 MB</figcaption></figure>
+  <figure class="card"><span class="num">38</span><a href="wallpapers/yuri-wall-38.jpg" target="_blank"><img src="wallpapers/yuri-wall-38.jpg" loading="lazy"></a><figcaption>2048x1067 &middot; 0 MB</figcaption></figure>
+  <figure class="card"><span class="num">39</span><a href="wallpapers/yuri-wall-39.jpg" target="_blank"><img src="wallpapers/yuri-wall-39.jpg" loading="lazy"></a><figcaption>2048x1448 &middot; 1 MB</figcaption></figure>
+  <figure class="card"><span class="num">40</span><a href="wallpapers/yuri-wall-40.jpg" target="_blank"><img src="wallpapers/yuri-wall-40.jpg" loading="lazy"></a><figcaption>3800x2600 &middot; 1 MB</figcaption></figure>
+  <figure class="card"><span class="num">41</span><a href="wallpapers/yuri-wall-41.jpg" target="_blank"><img src="wallpapers/yuri-wall-41.jpg" loading="lazy"></a><figcaption>2005x1300 &middot; 0 MB</figcaption></figure>
+  <figure class="card"><span class="num">42</span><a href="wallpapers/yuri-wall-42.jpg" target="_blank"><img src="wallpapers/yuri-wall-42.jpg" loading="lazy"></a><figcaption>4096x2910 &middot; 1 MB</figcaption></figure>
+  <figure class="card"><span class="num">43</span><a href="wallpapers/yuri-wall-43.jpg" target="_blank"><img src="wallpapers/yuri-wall-43.jpg" loading="lazy"></a><figcaption>2048x1448 &middot; 0 MB</figcaption></figure>
+  <figure class="card"><span class="num">44</span><a href="wallpapers/yuri-wall-44.png" target="_blank"><img src="wallpapers/yuri-wall-44.png" loading="lazy"></a><figcaption>1772x1206 &middot; 0 MB</figcaption></figure>
+  <figure class="card"><span class="num">45</span><a href="wallpapers/yuri-wall-45.jpg" target="_blank"><img src="wallpapers/yuri-wall-45.jpg" loading="lazy"></a><figcaption>3671x1821 &middot; 0 MB</figcaption></figure>
+  <figure class="card"><span class="num">46</span><a href="wallpapers/yuri-wall-46.jpg" target="_blank"><img src="wallpapers/yuri-wall-46.jpg" loading="lazy"></a><figcaption>2048x1451 &middot; 0 MB</figcaption></figure>
+  <figure class="card"><span class="num">47</span><a href="wallpapers/yuri-wall-47.jpg" target="_blank"><img src="wallpapers/yuri-wall-47.jpg" loading="lazy"></a><figcaption>1791x1275 &middot; 0 MB</figcaption></figure>
+  <figure class="card"><span class="num">48</span><a href="wallpapers/yuri-wall-48.png" target="_blank"><img src="wallpapers/yuri-wall-48.png" loading="lazy"></a><figcaption>4844x2399 &middot; 8 MB</figcaption></figure>
+  <figure class="card"><span class="num">49</span><a href="wallpapers/yuri-wall-49.jpg" target="_blank"><img src="wallpapers/yuri-wall-49.jpg" loading="lazy"></a><figcaption>2086x1040 &middot; 0 MB</figcaption></figure>
+  <figure class="card"><span class="num">50</span><a href="wallpapers/yuri-wall-50.png" target="_blank"><img src="wallpapers/yuri-wall-50.png" loading="lazy"></a><figcaption>3108x2160 &middot; 3 MB</figcaption></figure></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const SUPABASE_URL = 'YOUR_SUPABASE_PROJECT_URL';
+    const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+    const hasSupabaseConfig =
+      SUPABASE_URL !== 'YOUR_SUPABASE_PROJECT_URL' &&
+      SUPABASE_ANON_KEY !== 'YOUR_SUPABASE_ANON_KEY';
+    let supabaseClient = null;
+    let supabaseInitializationError = '';
+    if (hasSupabaseConfig && window.supabase) {
+      try {
+        supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      } catch (error) {
+        supabaseInitializationError = error.message;
+      }
+    }
+    const openAccountModalBtn = document.getElementById('openAccountModal');
+    const accountModal = document.getElementById('accountModal');
+    const closeModalBtn = document.querySelector('.close-btn');
+    const accountForm = document.getElementById('accountForm');
+    const otpForm = document.getElementById('otpForm');
+    const otpEmail = document.getElementById('otpEmail');
+    const resendOtpBtn = document.getElementById('resendOtp');
+    const toast = document.getElementById('toast');
+    const dataSaverToggle = document.querySelector('.data-saver-toggle');
+    const uploadWallpaperButton = document.getElementById('uploadWallpaperButton');
+    const wallpaperFileInput = document.getElementById('wallpaperFile');
+    const myUploadsSection = document.getElementById('myUploadsSection');
+    const myUploadsGrid = document.getElementById('myUploadsGrid');
+    const backendSetupNotice = document.getElementById('backendSetupNotice');
+    const emailLabel = accountForm.elements.email.closest('label');
+    const passwordLabel = accountForm.elements.password.closest('label');
+    let pendingEmail = '';
+    let uploadsDatabase;
+    backendSetupNotice.hidden = hasSupabaseConfig && Boolean(supabaseClient);
+    if (!hasSupabaseConfig) {
+      emailLabel.hidden = true;
+      emailLabel.querySelector('input').required = false;
+      passwordLabel.hidden = true;
+      passwordLabel.querySelector('input').required = false;
+      accountForm.querySelector('[type="submit"]').textContent = 'Create demo account';
+    } else if (supabaseClient) {
+      backendSetupNotice.innerHTML = 'Email verification and unique usernames are enabled for this project.';
+    } else {
+      backendSetupNotice.textContent = 'Supabase is configured but did not load. Check your internet connection and reload.';
+    }
+
+    function createDemoAccount(username) {
+      const usernameKey = username.toLowerCase();
+      const usersKey = 'animeWallpaperDemoUsernames';
+      let usernames;
+      try {
+        usernames = JSON.parse(localStorage.getItem(usersKey) || '[]');
+        if (!Array.isArray(usernames) || usernames.some((name) => typeof name !== 'string')) {
+          throw new Error('Stored demo account data is invalid.');
+        }
+      } catch (error) {
+        showToast(`Could not read demo accounts: ${error.message}`);
+        return;
+      }
+
+      if (usernames.some((name) => name.toLowerCase() === usernameKey)) {
+        showToast('That username is already taken on this browser. Try another one.');
+        return;
+      }
+
+      try {
+        localStorage.setItem(usersKey, JSON.stringify([...usernames, username]));
+        localStorage.setItem('animeWallpaperDemoCurrentUser', username);
+      } catch (error) {
+        showToast(`Could not save this demo account: ${error.message}`);
+        return;
+      }
+
+      accountForm.reset();
+      closeModal();
+      showToast(`Demo account created for ${username}. It is saved only in this browser.`);
+    }
+
+    function openUploadsDatabase() {
+      if (uploadsDatabase) return uploadsDatabase;
+
+      uploadsDatabase = new Promise((resolve, reject) => {
+        const request = indexedDB.open('animeWallpaperGallery', 1);
+        request.onupgradeneeded = () => {
+          const database = request.result;
+          if (!database.objectStoreNames.contains('uploads')) {
+            database.createObjectStore('uploads', { keyPath: 'id' });
+          }
+        };
+        request.onsuccess = () => resolve(request.result);
+        request.onerror = () => reject(request.error || new Error('Could not open local wallpaper storage.'));
+      });
+
+      return uploadsDatabase;
+    }
+
+    function makeUploadCard(upload, username) {
+      const card = document.createElement('figure');
+      card.className = 'card upload-card';
+
+      const link = document.createElement('a');
+      const imageUrl = URL.createObjectURL(upload.image);
+      link.href = imageUrl;
+      link.target = '_blank';
+      link.rel = 'noopener';
+
+      const image = document.createElement('img');
+      image.src = imageUrl;
+      image.alt = upload.name;
+      image.loading = 'lazy';
+      link.append(image);
+
+      const caption = document.createElement('figcaption');
+      caption.textContent = `${upload.name} · ${(upload.image.size / (1024 * 1024)).toFixed(1)} MB`;
+      const deleteButton = document.createElement('button');
+      deleteButton.className = 'delete-upload';
+      deleteButton.type = 'button';
+      deleteButton.textContent = 'Delete wallpaper';
+      deleteButton.setAttribute('aria-label', `Delete ${upload.name}`);
+      deleteButton.addEventListener('click', () => {
+        const confirmed = window.confirm(`Delete "${upload.name}" from your uploads? This cannot be undone.`);
+        if (confirmed) {
+          deleteUserUpload(upload.id, username, upload.name, deleteButton);
+        }
+      });
+      card.append(link, caption, deleteButton);
+      return card;
+    }
+
+    async function showUserUploads(username) {
+      const database = await openUploadsDatabase();
+      const uploads = await new Promise((resolve, reject) => {
+        const transaction = database.transaction('uploads', 'readonly');
+        const request = transaction.objectStore('uploads').getAll();
+        request.onsuccess = () => resolve(request.result);
+        request.onerror = () => reject(request.error || new Error('Could not load saved wallpapers.'));
+      });
+      const userUploads = uploads.filter((upload) => upload.username === username);
+      const previousImages = myUploadsGrid.querySelectorAll('img');
+      previousImages.forEach((image) => URL.revokeObjectURL(image.src));
+      myUploadsGrid.replaceChildren(...userUploads.map((upload) => makeUploadCard(upload, username)));
+      myUploadsSection.hidden = userUploads.length === 0;
+    }
+
+    async function deleteUserUpload(id, username, name, button) {
+      button.disabled = true;
+      try {
+        const database = await openUploadsDatabase();
+        await new Promise((resolve, reject) => {
+          const transaction = database.transaction('uploads', 'readwrite');
+          transaction.objectStore('uploads').delete(id);
+          transaction.oncomplete = resolve;
+          transaction.onerror = () => reject(transaction.error || new Error('Could not delete this wallpaper.'));
+          transaction.onabort = () => reject(transaction.error || new Error('Wallpaper deletion was cancelled.'));
+        });
+        await showUserUploads(username);
+        showToast(`${name} was deleted from your uploads.`);
+      } catch (error) {
+        button.disabled = false;
+        showToast(`Could not delete wallpaper: ${error.message}`);
+      }
+    }
+
+    async function saveUserUpload(file, username) {
+      const database = await openUploadsDatabase();
+      await new Promise((resolve, reject) => {
+        const transaction = database.transaction('uploads', 'readwrite');
+        transaction.objectStore('uploads').add({
+          id: crypto.randomUUID(),
+          username,
+          name: file.name,
+          image: file,
+          createdAt: Date.now()
+        });
+        transaction.oncomplete = resolve;
+        transaction.onerror = () => reject(transaction.error || new Error('Could not save this wallpaper.'));
+        transaction.onabort = () => reject(transaction.error || new Error('Wallpaper save was cancelled.'));
+      });
+      await showUserUploads(username);
+    }
+
+    function openModal() {
+      accountModal.classList.add('open');
+      accountModal.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeModal() {
+      accountModal.classList.remove('open');
+      accountModal.setAttribute('aria-hidden', 'true');
+    }
+
+    function showSignupForm() {
+      otpForm.hidden = true;
+      accountForm.hidden = false;
+    }
+
+    function showOtpForm(email) {
+      pendingEmail = email;
+      otpEmail.textContent = email;
+      accountForm.hidden = true;
+      otpForm.hidden = false;
+      otpForm.elements.token.focus();
+    }
+
+    function isSupabaseConfigured() {
+      if (!hasSupabaseConfig) {
+        showToast('Set your Supabase project URL and public anon key in gallery.html first.');
+        return false;
+      }
+      if (!supabaseClient) {
+        showToast(supabaseInitializationError || 'Supabase did not load. Check your internet connection and reload the page.');
+        return false;
+      }
+      return true;
+    }
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add('show');
+      window.clearTimeout(showToast.timer);
+      showToast.timer = window.setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2400);
+    }
+
+    openAccountModalBtn.addEventListener('click', () => {
+      showSignupForm();
+      openModal();
+    });
+    uploadWallpaperButton.addEventListener('click', () => {
+      let username;
+      try {
+        username = localStorage.getItem('animeWallpaperDemoCurrentUser');
+      } catch (error) {
+        showToast(`Could not check the current demo account: ${error.message}`);
+        return;
+      }
+
+      if (!username) {
+        showToast('Create a demo account in this browser before uploading.');
+        showSignupForm();
+        openModal();
+        return;
+      }
+      wallpaperFileInput.click();
+    });
+
+    wallpaperFileInput.addEventListener('change', async () => {
+      const file = wallpaperFileInput.files?.[0];
+      if (!file) return;
+      if (!file.type.startsWith('image/')) {
+        showToast('Choose an image file to upload.');
+        wallpaperFileInput.value = '';
+        return;
+      }
+      if (file.size > 15 * 1024 * 1024) {
+        showToast('That image is over the 15 MB limit.');
+        wallpaperFileInput.value = '';
+        return;
+      }
+
+      const username = localStorage.getItem('animeWallpaperDemoCurrentUser');
+      if (!username) {
+        showToast('Create a demo account in this browser before uploading.');
+        wallpaperFileInput.value = '';
+        return;
+      }
+
+      uploadWallpaperButton.disabled = true;
+      uploadWallpaperButton.textContent = 'Saving wallpaper…';
+      try {
+        await saveUserUpload(file, username);
+        showToast(`${file.name} was added to your uploads.`);
+      } catch (error) {
+        showToast(`Could not save wallpaper: ${error.message}`);
+      } finally {
+        uploadWallpaperButton.disabled = false;
+        uploadWallpaperButton.textContent = '＋ Upload wallpaper';
+        wallpaperFileInput.value = '';
+      }
+    });
+
+    closeModalBtn.addEventListener('click', closeModal);
+    accountModal.addEventListener('click', (event) => {
+      if (event.target === accountModal) closeModal();
+    });
+
+    accountForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const formData = new FormData(accountForm);
+      const username = String(formData.get('username')).trim().toLowerCase();
+      if (!hasSupabaseConfig) {
+        createDemoAccount(username);
+        return;
+      }
+      if (!isSupabaseConfigured()) return;
+
+      const email = String(formData.get('email')).trim();
+      const submitButton = accountForm.querySelector('[type="submit"]');
+      submitButton.disabled = true;
+      submitButton.textContent = 'Checking username…';
+      try {
+        const { data: isAvailable, error: availabilityError } = await supabaseClient.rpc(
+          'is_username_available',
+          { candidate_username: username }
+        );
+
+        if (availabilityError) {
+          showToast('Run supabase-setup.sql in your Supabase SQL Editor before signing up.');
+          return;
+        }
+        if (!isAvailable) {
+          showToast('That username is taken or invalid. Choose another one.');
+          return;
+        }
+
+        submitButton.textContent = 'Creating account…';
+        const { data, error } = await supabaseClient.auth.signUp({
+          email,
+          password: String(formData.get('password')),
+          options: {
+            data: { username }
+          }
+        });
+
+        if (error) {
+          showToast(/already registered|already exists/i.test(error.message)
+            ? 'An account already uses that email address.'
+            : error.message);
+          return;
+        }
+
+        if (data.session) {
+          closeModal();
+          showToast('Your email is verified and your account is ready.');
+          accountForm.reset();
+          return;
+        }
+
+        showOtpForm(email);
+        showToast('Check your email for the verification code.');
+      } catch (error) {
+        showToast(`Could not start signup: ${error.message}`);
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = 'Create my account';
+      }
+    });
+
+    otpForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!isSupabaseConfigured()) return;
+
+      const token = String(new FormData(otpForm).get('token')).trim();
+      try {
+        const { error } = await supabaseClient.auth.verifyOtp({
+          email: pendingEmail,
+          token,
+          type: 'signup'
+        });
+
+        if (error) {
+          showToast(error.message);
+          return;
+        }
+
+        closeModal();
+        showToast('Email verified. Your account is ready!');
+        accountForm.reset();
+        otpForm.reset();
+        showSignupForm();
+      } catch (error) {
+        showToast(`Could not verify the code: ${error.message}`);
+      }
+    });
+
+    resendOtpBtn.addEventListener('click', async () => {
+      if (!isSupabaseConfigured()) return;
+
+      try {
+        const { error } = await supabaseClient.auth.resend({
+          type: 'signup',
+          email: pendingEmail
+        });
+        showToast(error ? error.message : 'A new verification code was sent.');
+      } catch (error) {
+        showToast(`Could not resend the code: ${error.message}`);
+      }
+    });
+
+    dataSaverToggle.addEventListener('click', () => {
+      const active = document.body.classList.toggle('data-saver-active');
+      const enabled = active ? 'On' : 'Off';
+      dataSaverToggle.textContent = `Data Saver: ${enabled}`;
+      dataSaverToggle.setAttribute('aria-pressed', String(active));
+      showToast(active ? 'Data Saver enabled' : 'Data Saver disabled');
+    });
+
+    try {
+      const currentUsername = localStorage.getItem('animeWallpaperDemoCurrentUser');
+      if (currentUsername) {
+        showUserUploads(currentUsername).catch((error) => {
+          showToast(`Could not load saved wallpapers: ${error.message}`);
+        });
+      }
+    } catch (error) {
+      showToast(`Could not restore your local account: ${error.message}`);
+    }
+  </script>
+</body></html>
